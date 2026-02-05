@@ -12,7 +12,6 @@
   <!-- Framer Motion -->
   <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
 
-  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -29,9 +28,10 @@
       color: #e5e7eb;
     }
 
+    /* OVERLAY */
     .app {
       min-height: 100vh;
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(15, 23, 42, 0.8);
     }
 
     /* NAVBAR */
@@ -39,9 +39,8 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(2, 6, 23, 0.85);
-      backdrop-filter: blur(8px);
-      z-index: 20;
+      background: rgba(2, 6, 23, 0.95);
+      z-index: 999;
     }
 
     .nav-inner {
@@ -54,30 +53,35 @@
     }
 
     .nav-links a {
-      margin-left: 20px;
+      margin-left: 18px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #1e293b;
       text-decoration: none;
-      color: #cbd5f5;
-      font-size: 0.95rem;
+      color: white;
+      font-size: 0.9rem;
     }
 
     .nav-links a:hover {
-      color: #38bdf8;
+      background: #38bdf8;
+      color: #020617;
     }
 
     .lang-btn {
-      background: #1e293b;
-      color: white;
-      border: none;
+      margin-left: 12px;
       padding: 6px 14px;
-      border-radius: 20px;
+      border-radius: 999px;
+      border: none;
       cursor: pointer;
-      margin-left: 16px;
+      background: #38bdf8;
+      color: #020617;
+      font-weight: 600;
     }
 
     /* HERO */
     .hero {
       text-align: center;
-      padding: 160px 20px 120px;
+      padding: 180px 20px 120px;
     }
 
     .hero h1 {
@@ -87,7 +91,22 @@
 
     .hero p {
       color: #cbd5f5;
-      font-size: 1.1rem;
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons a {
+      display: inline-block;
+      margin: 0 8px;
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: #38bdf8;
+      color: #020617;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .hero-buttons a:hover {
+      background: #7dd3fc;
     }
 
     /* SECTION */
@@ -104,19 +123,12 @@
 
     /* CARD */
     .card {
-      background: rgba(2, 6, 23, 0.85);
-      backdrop-filter: blur(6px);
+      background: rgba(2, 6, 23, 0.9);
       border-radius: 16px;
       padding: 28px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     }
 
-    .card p {
-      color: #cbd5f5;
-      line-height: 1.6;
-    }
-
-    /* GRID */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -127,160 +139,124 @@
       text-align: center;
       color: #94a3b8;
       padding-bottom: 40px;
-      font-size: 0.9rem;
     }
   </style>
 </head>
 
 <body>
-  <div id="root"></div>
+<div id="root"></div>
 
-  <script>
-    const { useState } = React;
-    const { motion } = window["framer-motion"];
+<script>
+  const { useState } = React;
+  const { motion } = window["framer-motion"];
 
-    function Portfolio() {
-      const [lang, setLang] = useState("id");
+  function Portfolio() {
+    const [lang, setLang] = useState("id");
 
-      const text = {
-        id: {
-          role: "Web Developer & UI Designer",
-          about: "Tentang Saya",
-          aboutText:
-            "Saya membangun website modern dengan fokus pada performa, estetika, dan pengalaman pengguna.",
-          articles: "Artikel",
-          projects: "Proyek",
-          contact: "Kontak",
-          desc: "Deskripsi singkat konten."
-        },
-        en: {
-          role: "Web Developer & UI Designer",
-          about: "About Me",
-          aboutText:
-            "I build modern websites with a strong focus on performance, aesthetics, and user experience.",
-          articles: "Articles",
-          projects: "Projects",
-          contact: "Contact",
-          desc: "Short description of the content."
-        }
-      };
+    const t = {
+      id: {
+        role: "Web Developer & UI Designer",
+        about: "Tentang Saya",
+        articles: "Artikel",
+        projects: "Proyek",
+        contact: "Kontak",
+        desc: "Deskripsi singkat konten."
+      },
+      en: {
+        role: "Web Developer & UI Designer",
+        about: "About Me",
+        articles: "Articles",
+        projects: "Projects",
+        contact: "Contact",
+        desc: "Short description."
+      }
+    }[lang];
 
-      const t = text[lang];
+    return React.createElement(
+      "div",
+      { className: "app" },
 
-      return React.createElement(
-        "div",
-        { className: "app" },
-
-        /* NAVBAR */
+      /* NAV */
+      React.createElement(
+        "nav",
+        null,
         React.createElement(
-          "nav",
-          null,
+          "div",
+          { className: "nav-inner" },
+          React.createElement("strong", null, "Portfolio"),
           React.createElement(
             "div",
-            { className: "nav-inner" },
-            React.createElement("strong", null, "Portfolio"),
+            { className: "nav-links" },
+            React.createElement("a", { href: "#articles" }, t.articles),
+            React.createElement("a", { href: "#projects" }, t.projects),
+            React.createElement("a", { href: "#contact" }, t.contact),
             React.createElement(
-              "div",
-              { className: "nav-links" },
-              React.createElement("a", { href: "#about" }, t.about),
-              React.createElement("a", { href: "#articles" }, t.articles),
-              React.createElement("a", { href: "#projects" }, t.projects),
-              React.createElement("a", { href: "#contact" }, t.contact),
-              React.createElement(
-                "button",
-                {
-                  className: "lang-btn",
-                  onClick: () => setLang(lang === "id" ? "en" : "id")
-                },
-                lang === "id" ? "EN" : "ID"
-              )
+              "button",
+              { className: "lang-btn", onClick: () => setLang(lang === "id" ? "en" : "id") },
+              lang === "id" ? "EN" : "ID"
             )
           )
-        ),
+        )
+      ),
 
-        /* HERO */
+      /* HERO */
+      React.createElement(
+        motion.section,
+        { className: "hero", initial: { opacity: 0, y: 40 }, animate: { opacity: 1, y: 0 } },
+        React.createElement("h1", null, "Nama Anda"),
+        React.createElement("p", null, t.role),
         React.createElement(
-          motion.section,
-          {
-            className: "hero",
-            initial: { opacity: 0, y: 40 },
-            animate: { opacity: 1, y: 0 }
-          },
-          React.createElement("h1", null, "Nama Anda"),
-          React.createElement("p", null, t.role)
-        ),
+          "div",
+          { className: "hero-buttons" },
+          React.createElement("a", { href: "#articles" }, t.articles),
+          React.createElement("a", { href: "#projects" }, t.projects),
+          React.createElement("a", { href: "#contact" }, t.contact)
+        )
+      ),
 
-        /* ABOUT */
+      /* ARTICLES */
+      React.createElement(
+        "section",
+        { className: "section", id: "articles" },
+        React.createElement("h2", null, t.articles),
         React.createElement(
-          "section",
-          { className: "section", id: "about" },
-          React.createElement(
-            motion.div,
-            { className: "card", whileInView: { opacity: [0,1], y: [30,0] } },
-            React.createElement("h2", null, t.about),
-            React.createElement("p", null, t.aboutText)
+          "div",
+          { className: "grid" },
+          ["Artikel 1", "Artikel 2", "Artikel 3"].map((a, i) =>
+            React.createElement("div", { key: i, className: "card" }, a)
           )
-        ),
+        )
+      ),
 
-        /* ARTICLES */
+      /* PROJECTS */
+      React.createElement(
+        "section",
+        { className: "section", id: "projects" },
+        React.createElement("h2", null, t.projects),
         React.createElement(
-          "section",
-          { className: "section", id: "articles" },
-          React.createElement("h2", null, t.articles),
-          React.createElement(
-            "div",
-            { className: "grid" },
-            ["Artikel 1", "Artikel 2", "Artikel 3"].map((a, i) =>
-              React.createElement(
-                motion.div,
-                { key: i, className: "card", whileHover: { y: -8 } },
-                React.createElement("h3", null, a),
-                React.createElement("p", null, t.desc)
-              )
-            )
+          "div",
+          { className: "grid" },
+          ["Project A", "Project B", "Project C"].map((p, i) =>
+            React.createElement("div", { key: i, className: "card" }, p)
           )
-        ),
+        )
+      ),
 
-        /* PROJECTS */
-        React.createElement(
-          "section",
-          { className: "section", id: "projects" },
-          React.createElement("h2", null, t.projects),
-          React.createElement(
-            "div",
-            { className: "grid" },
-            ["Project A", "Project B", "Project C"].map((p, i) =>
-              React.createElement(
-                motion.div,
-                { key: i, className: "card", whileHover: { y: -8 } },
-                React.createElement("h3", null, p),
-                React.createElement("p", null, t.desc)
-              )
-            )
-          )
-        ),
+      /* CONTACT */
+      React.createElement(
+        "section",
+        { className: "section", id: "contact" },
+        React.createElement("h2", null, t.contact),
+        React.createElement("div", { className: "card" }, "Email: email@anda.com")
+      ),
 
-        /* CONTACT */
-        React.createElement(
-          "section",
-          { className: "section", id: "contact" },
-          React.createElement(
-            motion.div,
-            { className: "card" },
-            React.createElement("h2", null, t.contact),
-            React.createElement("p", null, "Email: email@anda.com"),
-            React.createElement("p", null, "WhatsApp: 08xxxxxxxx"),
-            React.createElement("p", null, "LinkedIn: linkedin.com/in/anda")
-          )
-        ),
-
-        React.createElement("footer", null, "© 2026 Nama Anda")
-      );
-    }
-
-    ReactDOM.createRoot(document.getElementById("root")).render(
-      React.createElement(Portfolio)
+      React.createElement("footer", null, "© 2026 Nama Anda")
     );
-  </script>
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    React.createElement(Portfolio)
+  );
+</script>
 </body>
 </html>
