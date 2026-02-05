@@ -5,14 +5,14 @@
   <title>Portfolio | Nama Anda</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- React & ReactDOM -->
+  <!-- React -->
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
   <!-- Framer Motion -->
   <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
 
-  <!-- Fonts -->
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -24,12 +24,14 @@
 
     body {
       font-family: Inter, system-ui, sans-serif;
-      background: #0f172a;
+      background: url("background.jpg") center / cover no-repeat fixed;
       color: #e5e7eb;
     }
 
+    /* Overlay agar teks terbaca */
     .app {
       min-height: 100vh;
+      background: rgba(15, 23, 42, 0.75);
     }
 
     /* Language Button */
@@ -37,7 +39,7 @@
       position: fixed;
       top: 20px;
       right: 20px;
-      background: #1e293b;
+      background: rgba(30, 41, 59, 0.9);
       color: white;
       border: none;
       padding: 8px 16px;
@@ -62,7 +64,7 @@
     }
 
     .hero p {
-      color: #94a3b8;
+      color: #cbd5f5;
       font-size: 1.1rem;
     }
 
@@ -80,14 +82,15 @@
 
     /* Cards */
     .card {
-      background: #020617;
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(6px);
       border-radius: 16px;
       padding: 28px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
     .card p {
-      color: #94a3b8;
+      color: #cbd5f5;
       line-height: 1.6;
     }
 
@@ -100,7 +103,7 @@
 
     footer {
       text-align: center;
-      color: #64748b;
+      color: #94a3b8;
       padding-bottom: 40px;
       font-size: 0.9rem;
     }
@@ -144,6 +147,7 @@
         "div",
         { className: "app" },
 
+        /* Language Toggle */
         React.createElement(
           "button",
           {
@@ -153,6 +157,7 @@
           lang === "id" ? "EN" : "ID"
         ),
 
+        /* HERO */
         React.createElement(
           motion.section,
           {
@@ -165,6 +170,7 @@
           React.createElement("p", null, t.role)
         ),
 
+        /* ABOUT */
         React.createElement(
           "section",
           { className: "section" },
@@ -181,6 +187,7 @@
           )
         ),
 
+        /* PROJECTS */
         React.createElement(
           "section",
           { className: "section" },
@@ -203,6 +210,7 @@
           )
         ),
 
+        /* CONTACT */
         React.createElement(
           "section",
           { className: "section" },
