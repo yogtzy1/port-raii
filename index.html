@@ -1,93 +1,104 @@
+import React, { useState } from "react";
+import { createRoot } from "react-dom/client";
 import { motion } from "framer-motion";
+import "./style.css";
 
-export default function Portfolio() {
-  const lang = "id"; // ganti ke 'en' untuk English
+function Portfolio() {
+  const [lang, setLang] = useState("id");
 
   const content = {
     id: {
       role: "Web Developer & UI Designer",
       aboutTitle: "Tentang Saya",
       about:
-        "Saya membangun website modern dengan fokus pada performa, estetika, dan pengalaman pengguna. Terbiasa bekerja dengan teknologi web terkini dan kebutuhan bisnis.",
+        "Saya membangun website modern dengan fokus pada performa, estetika, dan pengalaman pengguna.",
       projects: "Proyek",
       contact: "Kontak",
+      desc: "Deskripsi singkat proyek dan teknologi yang digunakan.",
     },
     en: {
       role: "Web Developer & UI Designer",
       aboutTitle: "About Me",
       about:
-        "I build modern websites with a strong focus on performance, aesthetics, and user experience. Experienced in delivering solutions using modern web technologies.",
+        "I build modern websites with a strong focus on performance, aesthetics, and user experience.",
       projects: "Projects",
       contact: "Contact",
+      desc: "Short project description and technologies used.",
     },
-  }[lang];
+  };
+
+  const t = content[lang];
 
   return (
-    <div className="min-h-screen bg-[#0f172a] text-slate-100 font-sans">
-      {/* HERO */}
+    <div className="app">
+      {/* Language Toggle */}
+      <button
+        className="lang-btn"
+        onClick={() => setLang(lang === "id" ? "en" : "id")}
+      >
+        {lang === "id" ? "EN" : "ID"}
+      </button>
+
+      {/* Hero */}
       <motion.section
-        initial={{ opacity: 0, y: 30 }}
+        className="hero"
+        initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-center py-24 px-6"
       >
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Nama Anda</h1>
-        <p className="text-lg text-slate-300">{content.role}</p>
+        <h1>Nama Anda</h1>
+        <p>{t.role}</p>
       </motion.section>
 
-      {/* ABOUT */}
-      <section className="max-w-4xl mx-auto px-6 mb-24">
+      {/* About */}
+      <section className="section">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          className="card"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="bg-slate-900 rounded-2xl p-8 shadow-xl"
         >
-          <h2 className="text-2xl font-semibold mb-4">{content.aboutTitle}</h2>
-          <p className="text-slate-300 leading-relaxed">{content.about}</p>
+          <h2>{t.aboutTitle}</h2>
+          <p>{t.about}</p>
         </motion.div>
       </section>
 
-      {/* PROJECTS */}
-      <section className="max-w-5xl mx-auto px-6 mb-24">
-        <h2 className="text-2xl font-semibold mb-8">{content.projects}</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+      {/* Projects */}
+      <section className="section">
+        <h2>{t.projects}</h2>
+        <div className="grid">
           {["Project A", "Project B", "Project C"].map((p, i) => (
             <motion.div
               key={i}
-              whileHover={{ y: -6 }}
+              className="card"
+              whileHover={{ y: -8 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="bg-slate-900 rounded-2xl p-6 shadow-lg"
             >
-              <h3 className="font-semibold mb-2">{p}</h3>
-              <p className="text-sm text-slate-400">
-                Deskripsi singkat proyek dan teknologi yang digunakan.
-              </p>
+              <h3>{p}</h3>
+              <p>{t.desc}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* CONTACT */}
-      <section className="max-w-4xl mx-auto px-6 mb-24">
+      {/* Contact */}
+      <section className="section">
         <motion.div
+          className="card"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="bg-slate-900 rounded-2xl p-8 shadow-xl"
         >
-          <h2 className="text-2xl font-semibold mb-4">{content.contact}</h2>
-          <p className="text-slate-300">Email: email@anda.com</p>
-          <p className="text-slate-300">GitHub: github.com/anda</p>
-          <p className="text-slate-300">LinkedIn: linkedin.com/in/anda</p>
+          <h2>{t.contact}</h2>
+          <p>Email: email@anda.com</p>
+          <p>GitHub: github.com/anda</p>
+          <p>LinkedIn: linkedin.com/in/anda</p>
         </motion.div>
       </section>
 
-      <footer className="text-center text-sm text-slate-500 pb-8">
-        © 2026 Nama Anda
-      </footer>
+      <footer>© 2026 Nama Anda</footer>
     </div>
   );
 }
+
+createRoot(document.getElementById("root")).render(<Portfolio />);
