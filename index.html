@@ -20,6 +20,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
 
     body {
@@ -28,34 +29,55 @@
       color: #e5e7eb;
     }
 
-    /* Overlay agar teks terbaca */
     .app {
       min-height: 100vh;
       background: rgba(15, 23, 42, 0.75);
     }
 
-    /* Language Button */
-    .lang-btn {
+    /* NAVBAR */
+    nav {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(30, 41, 59, 0.9);
+      top: 0;
+      width: 100%;
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 20;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+    }
+
+    .nav-links a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #cbd5f5;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: #38bdf8;
+    }
+
+    .lang-btn {
+      background: #1e293b;
       color: white;
       border: none;
-      padding: 8px 16px;
+      padding: 6px 14px;
       border-radius: 20px;
       cursor: pointer;
-      z-index: 10;
+      margin-left: 16px;
     }
 
-    .lang-btn:hover {
-      background: #334155;
-    }
-
-    /* Hero */
+    /* HERO */
     .hero {
       text-align: center;
-      padding: 120px 20px;
+      padding: 160px 20px 120px;
     }
 
     .hero h1 {
@@ -68,10 +90,10 @@
       font-size: 1.1rem;
     }
 
-    /* Sections */
+    /* SECTION */
     .section {
       max-width: 1000px;
-      margin: 0 auto 100px;
+      margin: 0 auto 120px;
       padding: 0 20px;
     }
 
@@ -80,13 +102,13 @@
       margin-bottom: 24px;
     }
 
-    /* Cards */
+    /* CARD */
     .card {
       background: rgba(2, 6, 23, 0.85);
       backdrop-filter: blur(6px);
       border-radius: 16px;
       padding: 28px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     }
 
     .card p {
@@ -94,7 +116,7 @@
       line-height: 1.6;
     }
 
-    /* Grid */
+    /* GRID */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -120,41 +142,60 @@
     function Portfolio() {
       const [lang, setLang] = useState("id");
 
-      const content = {
+      const text = {
         id: {
           role: "Web Developer & UI Designer",
-          aboutTitle: "Tentang Saya",
-          about:
+          about: "Tentang Saya",
+          aboutText:
             "Saya membangun website modern dengan fokus pada performa, estetika, dan pengalaman pengguna.",
+          articles: "Artikel",
           projects: "Proyek",
           contact: "Kontak",
-          desc: "Deskripsi singkat proyek dan teknologi yang digunakan."
+          desc: "Deskripsi singkat konten."
         },
         en: {
           role: "Web Developer & UI Designer",
-          aboutTitle: "About Me",
-          about:
+          about: "About Me",
+          aboutText:
             "I build modern websites with a strong focus on performance, aesthetics, and user experience.",
+          articles: "Articles",
           projects: "Projects",
           contact: "Contact",
-          desc: "Short project description and technologies used."
+          desc: "Short description of the content."
         }
       };
 
-      const t = content[lang];
+      const t = text[lang];
 
       return React.createElement(
         "div",
         { className: "app" },
 
-        /* Language Toggle */
+        /* NAVBAR */
         React.createElement(
-          "button",
-          {
-            className: "lang-btn",
-            onClick: () => setLang(lang === "id" ? "en" : "id")
-          },
-          lang === "id" ? "EN" : "ID"
+          "nav",
+          null,
+          React.createElement(
+            "div",
+            { className: "nav-inner" },
+            React.createElement("strong", null, "Portfolio"),
+            React.createElement(
+              "div",
+              { className: "nav-links" },
+              React.createElement("a", { href: "#about" }, t.about),
+              React.createElement("a", { href: "#articles" }, t.articles),
+              React.createElement("a", { href: "#projects" }, t.projects),
+              React.createElement("a", { href: "#contact" }, t.contact),
+              React.createElement(
+                "button",
+                {
+                  className: "lang-btn",
+                  onClick: () => setLang(lang === "id" ? "en" : "id")
+                },
+                lang === "id" ? "EN" : "ID"
+              )
+            )
+          )
         ),
 
         /* HERO */
@@ -163,8 +204,7 @@
           {
             className: "hero",
             initial: { opacity: 0, y: 40 },
-            animate: { opacity: 1, y: 0 },
-            transition: { duration: 0.8 }
+            animate: { opacity: 1, y: 0 }
           },
           React.createElement("h1", null, "Nama Anda"),
           React.createElement("p", null, t.role)
@@ -173,24 +213,38 @@
         /* ABOUT */
         React.createElement(
           "section",
-          { className: "section" },
+          { className: "section", id: "about" },
           React.createElement(
             motion.div,
-            {
-              className: "card",
-              initial: { opacity: 0, y: 30 },
-              whileInView: { opacity: 1, y: 0 },
-              viewport: { once: true }
-            },
-            React.createElement("h2", null, t.aboutTitle),
-            React.createElement("p", null, t.about)
+            { className: "card", whileInView: { opacity: [0,1], y: [30,0] } },
+            React.createElement("h2", null, t.about),
+            React.createElement("p", null, t.aboutText)
+          )
+        ),
+
+        /* ARTICLES */
+        React.createElement(
+          "section",
+          { className: "section", id: "articles" },
+          React.createElement("h2", null, t.articles),
+          React.createElement(
+            "div",
+            { className: "grid" },
+            ["Artikel 1", "Artikel 2", "Artikel 3"].map((a, i) =>
+              React.createElement(
+                motion.div,
+                { key: i, className: "card", whileHover: { y: -8 } },
+                React.createElement("h3", null, a),
+                React.createElement("p", null, t.desc)
+              )
+            )
           )
         ),
 
         /* PROJECTS */
         React.createElement(
           "section",
-          { className: "section" },
+          { className: "section", id: "projects" },
           React.createElement("h2", null, t.projects),
           React.createElement(
             "div",
@@ -198,11 +252,7 @@
             ["Project A", "Project B", "Project C"].map((p, i) =>
               React.createElement(
                 motion.div,
-                {
-                  key: i,
-                  className: "card",
-                  whileHover: { y: -8 }
-                },
+                { key: i, className: "card", whileHover: { y: -8 } },
                 React.createElement("h3", null, p),
                 React.createElement("p", null, t.desc)
               )
@@ -213,27 +263,18 @@
         /* CONTACT */
         React.createElement(
           "section",
-          { className: "section" },
+          { className: "section", id: "contact" },
           React.createElement(
             motion.div,
-            {
-              className: "card",
-              initial: { opacity: 0 },
-              whileInView: { opacity: 1 },
-              viewport: { once: true }
-            },
+            { className: "card" },
             React.createElement("h2", null, t.contact),
             React.createElement("p", null, "Email: email@anda.com"),
-            React.createElement("p", null, "GitHub: github.com/anda"),
+            React.createElement("p", null, "WhatsApp: 08xxxxxxxx"),
             React.createElement("p", null, "LinkedIn: linkedin.com/in/anda")
           )
         ),
 
-        React.createElement(
-          "footer",
-          null,
-          "© 2026 Nama Anda"
-        )
+        React.createElement("footer", null, "© 2026 Nama Anda")
       );
     }
 
@@ -243,4 +284,3 @@
   </script>
 </body>
 </html>
-
