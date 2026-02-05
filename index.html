@@ -1,104 +1,238 @@
-import React, { useState } from "react";
-import { createRoot } from "react-dom/client";
-import { motion } from "framer-motion";
-import "./style.css";
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Portfolio | Nama Anda</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-function Portfolio() {
-  const [lang, setLang] = useState("id");
+  <!-- React & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
-  const content = {
-    id: {
-      role: "Web Developer & UI Designer",
-      aboutTitle: "Tentang Saya",
-      about:
-        "Saya membangun website modern dengan fokus pada performa, estetika, dan pengalaman pengguna.",
-      projects: "Proyek",
-      contact: "Kontak",
-      desc: "Deskripsi singkat proyek dan teknologi yang digunakan.",
-    },
-    en: {
-      role: "Web Developer & UI Designer",
-      aboutTitle: "About Me",
-      about:
-        "I build modern websites with a strong focus on performance, aesthetics, and user experience.",
-      projects: "Projects",
-      contact: "Contact",
-      desc: "Short project description and technologies used.",
-    },
-  };
+  <!-- Framer Motion -->
+  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
 
-  const t = content[lang];
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-  return (
-    <div className="app">
-      {/* Language Toggle */}
-      <button
-        className="lang-btn"
-        onClick={() => setLang(lang === "id" ? "en" : "id")}
-      >
-        {lang === "id" ? "EN" : "ID"}
-      </button>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      {/* Hero */}
-      <motion.section
-        className="hero"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h1>Nama Anda</h1>
-        <p>{t.role}</p>
-      </motion.section>
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+    }
 
-      {/* About */}
-      <section className="section">
-        <motion.div
-          className="card"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2>{t.aboutTitle}</h2>
-          <p>{t.about}</p>
-        </motion.div>
-      </section>
+    .app {
+      min-height: 100vh;
+    }
 
-      {/* Projects */}
-      <section className="section">
-        <h2>{t.projects}</h2>
-        <div className="grid">
-          {["Project A", "Project B", "Project C"].map((p, i) => (
-            <motion.div
-              key={i}
-              className="card"
-              whileHover={{ y: -8 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <h3>{p}</h3>
-              <p>{t.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+    /* Language Button */
+    .lang-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #1e293b;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      z-index: 10;
+    }
 
-      {/* Contact */}
-      <section className="section">
-        <motion.div
-          className="card"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <h2>{t.contact}</h2>
-          <p>Email: email@anda.com</p>
-          <p>GitHub: github.com/anda</p>
-          <p>LinkedIn: linkedin.com/in/anda</p>
-        </motion.div>
-      </section>
+    .lang-btn:hover {
+      background: #334155;
+    }
 
-      <footer>© 2026 Nama Anda</footer>
-    </div>
-  );
-}
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 120px 20px;
+    }
 
-createRoot(document.getElementById("root")).render(<Portfolio />);
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+
+    /* Sections */
+    .section {
+      max-width: 1000px;
+      margin: 0 auto 100px;
+      padding: 0 20px;
+    }
+
+    .section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+    }
+
+    /* Cards */
+    .card {
+      background: #020617;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .card p {
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    footer {
+      text-align: center;
+      color: #64748b;
+      padding-bottom: 40px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script>
+    const { useState } = React;
+    const { motion } = window["framer-motion"];
+
+    function Portfolio() {
+      const [lang, setLang] = useState("id");
+
+      const content = {
+        id: {
+          role: "Web Developer & UI Designer",
+          aboutTitle: "Tentang Saya",
+          about:
+            "Saya membangun website modern dengan fokus pada performa, estetika, dan pengalaman pengguna.",
+          projects: "Proyek",
+          contact: "Kontak",
+          desc: "Deskripsi singkat proyek dan teknologi yang digunakan."
+        },
+        en: {
+          role: "Web Developer & UI Designer",
+          aboutTitle: "About Me",
+          about:
+            "I build modern websites with a strong focus on performance, aesthetics, and user experience.",
+          projects: "Projects",
+          contact: "Contact",
+          desc: "Short project description and technologies used."
+        }
+      };
+
+      const t = content[lang];
+
+      return React.createElement(
+        "div",
+        { className: "app" },
+
+        React.createElement(
+          "button",
+          {
+            className: "lang-btn",
+            onClick: () => setLang(lang === "id" ? "en" : "id")
+          },
+          lang === "id" ? "EN" : "ID"
+        ),
+
+        React.createElement(
+          motion.section,
+          {
+            className: "hero",
+            initial: { opacity: 0, y: 40 },
+            animate: { opacity: 1, y: 0 },
+            transition: { duration: 0.8 }
+          },
+          React.createElement("h1", null, "Nama Anda"),
+          React.createElement("p", null, t.role)
+        ),
+
+        React.createElement(
+          "section",
+          { className: "section" },
+          React.createElement(
+            motion.div,
+            {
+              className: "card",
+              initial: { opacity: 0, y: 30 },
+              whileInView: { opacity: 1, y: 0 },
+              viewport: { once: true }
+            },
+            React.createElement("h2", null, t.aboutTitle),
+            React.createElement("p", null, t.about)
+          )
+        ),
+
+        React.createElement(
+          "section",
+          { className: "section" },
+          React.createElement("h2", null, t.projects),
+          React.createElement(
+            "div",
+            { className: "grid" },
+            ["Project A", "Project B", "Project C"].map((p, i) =>
+              React.createElement(
+                motion.div,
+                {
+                  key: i,
+                  className: "card",
+                  whileHover: { y: -8 }
+                },
+                React.createElement("h3", null, p),
+                React.createElement("p", null, t.desc)
+              )
+            )
+          )
+        ),
+
+        React.createElement(
+          "section",
+          { className: "section" },
+          React.createElement(
+            motion.div,
+            {
+              className: "card",
+              initial: { opacity: 0 },
+              whileInView: { opacity: 1 },
+              viewport: { once: true }
+            },
+            React.createElement("h2", null, t.contact),
+            React.createElement("p", null, "Email: email@anda.com"),
+            React.createElement("p", null, "GitHub: github.com/anda"),
+            React.createElement("p", null, "LinkedIn: linkedin.com/in/anda")
+          )
+        ),
+
+        React.createElement(
+          "footer",
+          null,
+          "© 2026 Nama Anda"
+        )
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(
+      React.createElement(Portfolio)
+    );
+  </script>
+</body>
+</html>
+
