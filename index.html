@@ -8,195 +8,120 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{
+  font-family:Inter,system-ui,sans-serif;
+  background:url("background.jpg") center/cover no-repeat fixed;
+  color:#e5e7eb
 }
-
-body {
-  font-family: Inter, system-ui, sans-serif;
-  background: url("background.jpg") center / cover no-repeat fixed;
-  color: #e5e7eb;
+.overlay{min-height:100vh;background:rgba(2,6,23,.78)}
+nav{
+  position:fixed;top:0;width:100%;
+  background:rgba(2,6,23,.95);z-index:1000
 }
-
-.overlay {
-  min-height: 100vh;
-  background: rgba(2, 6, 23, 0.78);
+.nav-inner{
+  max-width:1100px;margin:auto;
+  padding:14px 20px;
+  display:flex;justify-content:space-between;align-items:center
 }
-
-/* NAVBAR */
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(2, 6, 23, 0.95);
-  z-index: 1000;
+.nav-links a,.lang-btn{
+  margin-left:10px;padding:8px 16px;
+  background:#1e293b;border-radius:999px;
+  text-decoration:none;color:#fff;
+  font-size:.85rem;border:none;cursor:pointer
 }
-
-.nav-inner {
-  max-width: 1100px;
-  margin: auto;
-  padding: 14px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.hero{
+  padding:200px 20px 120px;text-align:center
 }
-
-.nav-links a,
-.lang-btn {
-  margin-left: 10px;
-  padding: 8px 16px;
-  background: #1e293b;
-  border-radius: 999px;
-  text-decoration: none;
-  color: white;
-  font-size: 0.85rem;
-  border: none;
-  cursor: pointer;
+.hero h1{font-size:3rem;margin-bottom:12px}
+.hero p{color:#cbd5f5;margin-bottom:32px}
+section{
+  max-width:1100px;margin:0 auto 120px;padding:0 20px
 }
+h2{margin-bottom:24px}
+.reveal{opacity:0;transform:translateY(40px);transition:.8s}
+.reveal.show{opacity:1;transform:none}
 
-.nav-links a:hover,
-.lang-btn:hover {
-  background: #38bdf8;
-  color: #020617;
+/* ARTICLE */
+.article-carousel{
+  display:flex;gap:24px;overflow-x:auto
 }
-
-/* HERO */
-.hero {
-  padding: 200px 20px 120px;
-  text-align: center;
+.article-card{
+  min-width:300px;
+  background:rgba(15,23,42,.9);
+  border-radius:18px;overflow:hidden
 }
-
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 12px;
-}
-
-.hero p {
-  color: #cbd5f5;
-  margin-bottom: 32px;
-}
-
-.hero-buttons a {
-  display: inline-block;
-  margin: 0 8px;
-  padding: 12px 26px;
-  background: #38bdf8;
-  color: #020617;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.hero-buttons a:hover {
-  background: #7dd3fc;
-}
-
-/* SECTION */
-section {
-  max-width: 1100px;
-  margin: 0 auto 120px;
-  padding: 0 20px;
-}
-
-section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 28px;
-}
-
-/* REVEAL */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
-}
-
-.reveal.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ARTICLE CAROUSEL */
-.article-carousel {
-  display: flex;
-  gap: 24px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-}
-
-.article-card {
-  min-width: 300px;
-  background: rgba(15, 23, 42, 0.9);
-  border-radius: 18px;
-  overflow: hidden;
-  scroll-snap-align: start;
-}
-
-.article-image {
-  height: 180px;
-  background-size: cover;
-  background-position: center;
-}
-
-.article-content {
-  padding: 20px;
+.article-image{height:180px;background-size:cover}
+.article-content{padding:20px}
+.btn{
+  margin-top:14px;
+  display:inline-block;
+  padding:10px 18px;
+  border-radius:999px;
+  background:#38bdf8;
+  color:#020617;
+  font-weight:600;
+  text-decoration:none;
+  cursor:pointer
 }
 
 /* PROJECT */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px
+}
+.card{
+  background:rgba(15,23,42,.9);
+  padding:28px;border-radius:16px
 }
 
-.card {
-  background: rgba(15, 23, 42, 0.9);
-  padding: 28px;
-  border-radius: 16px;
+/* MODAL */
+.modal{
+  position:fixed;inset:0;
+  background:rgba(2,6,23,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000
+}
+.modal-content{
+  background:#020617;
+  max-width:600px;
+  padding:32px;
+  border-radius:18px;
+  animation:pop .4s ease
+}
+@keyframes pop{
+  from{transform:scale(.85);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+.modal h3{margin-bottom:12px}
+.modal p{color:#cbd5f5}
+.close{
+  margin-top:20px;
+  display:inline-block;
+  color:#38bdf8;
+  cursor:pointer
 }
 
-/* CONTACT BUTTONS */
-.contact-buttons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-  gap: 16px;
+/* CONTACT */
+.contact-buttons{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px
 }
-
-.contact-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 14px 20px;
-  border-radius: 999px;
-  font-weight: 600;
-  color: white;
-  text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.contact-btn{
+  padding:14px;border-radius:999px;
+  color:#fff;text-align:center;
+  text-decoration:none;font-weight:600
 }
+.whatsapp{background:#25D366}
+.gmail{background:#EA4335}
+.github{background:#111827}
+.linkedin{background:#0A66C2}
 
-.contact-btn svg {
-  width: 20px;
-  height: 20px;
-}
-
-.contact-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-}
-
-.whatsapp { background: #25D366; }
-.gmail { background: #EA4335; }
-.github { background: #111827; }
-.linkedin { background: #0A66C2; }
-
-footer {
-  text-align: center;
-  padding: 40px;
-  color: #94a3b8;
-}
+footer{text-align:center;padding:40px;color:#94a3b8}
 </style>
 </head>
 
@@ -207,92 +132,102 @@ footer {
   <div class="nav-inner">
     <strong>Portfolio</strong>
     <div class="nav-links">
-      <a href="#artikel" data-id="Artikel" data-en="Articles">Artikel</a>
-      <a href="#proyek" data-id="Proyek" data-en="Projects">Proyek</a>
-      <a href="#kontak" data-id="Kontak" data-en="Contact">Kontak</a>
-      <button class="lang-btn" onclick="toggleLang()">ID / EN</button>
+      <a href="#artikel">Artikel</a>
+      <a href="#proyek">Proyek</a>
+      <a href="#kontak">Kontak</a>
+      <button class="lang-btn">ID / EN</button>
     </div>
   </div>
 </nav>
 
 <div class="hero reveal">
   <h1>Nama Anda</h1>
-  <p data-id="Web Developer & UI Designer"
-     data-en="Web Developer & UI Designer">
-     Web Developer & UI Designer
-  </p>
-  <div class="hero-buttons">
-    <a href="#artikel">Artikel</a>
-    <a href="#proyek">Proyek</a>
-    <a href="#kontak">Kontak</a>
+  <p>Web Developer & UI Designer</p>
+</div>
+
+<!-- ARTIKEL -->
+<section id="artikel" class="reveal">
+<h2>Artikel</h2>
+<div class="article-carousel">
+
+<div class="article-card">
+  <div class="article-image" style="background-image:url('artikel1.jpg')"></div>
+  <div class="article-content">
+    <h3>Website Modern</h3>
+    <p>Teknologi web terkini.</p>
+    <span class="btn" onclick="openModal('Website Modern','Artikel lengkap tentang teknologi web modern, best practice, performa, dan tren desain terbaru.')">Baca Selengkapnya</span>
   </div>
 </div>
 
-<section id="artikel" class="reveal">
-  <h2 data-id="Artikel" data-en="Articles">Artikel</h2>
-  <div class="article-carousel">
-    <div class="article-card">
-      <div class="article-image" style="background-image:url('artikel1.jpg')"></div>
-      <div class="article-content">
-        <h3>Website Modern</h3>
-        <p>Teknologi web terbaru.</p>
-      </div>
-    </div>
-    <div class="article-card">
-      <div class="article-image" style="background-image:url('artikel2.jpg')"></div>
-      <div class="article-content">
-        <h3>UI/UX</h3>
-        <p>Desain profesional.</p>
-      </div>
-    </div>
-    <div class="article-card">
-      <div class="article-image" style="background-image:url('artikel3.jpg')"></div>
-      <div class="article-content">
-        <h3>Optimasi</h3>
-        <p>Performa & SEO.</p>
-      </div>
-    </div>
+<div class="article-card">
+  <div class="article-image" style="background-image:url('artikel2.jpg')"></div>
+  <div class="article-content">
+    <h3>UI/UX Bisnis</h3>
+    <p>Desain berbasis konversi.</p>
+    <span class="btn" onclick="openModal('UI/UX Bisnis','Pembahasan lengkap tentang UI/UX untuk meningkatkan kepercayaan dan penjualan.')">Baca Selengkapnya</span>
   </div>
+</div>
+
+</div>
 </section>
 
+<!-- PROYEK -->
 <section id="proyek" class="reveal">
-  <h2 data-id="Proyek" data-en="Projects">Proyek</h2>
-  <div class="grid">
-    <div class="card">Project A</div>
-    <div class="card">Project B</div>
-    <div class="card">Project C</div>
-  </div>
+<h2>Proyek</h2>
+<div class="grid">
+
+<div class="card">
+  <h3>Project A</h3>
+  <p>Website Company Profile</p>
+  <span class="btn" onclick="openModal('Project A','Detail lengkap project A, teknologi yang digunakan, dan hasil yang dicapai.')">Detail Proyek</span>
+</div>
+
+<div class="card">
+  <h3>Project B</h3>
+  <p>Landing Page Produk</p>
+  <span class="btn" onclick="openModal('Project B','Studi kasus project B, optimasi performa dan konversi.')">Detail Proyek</span>
+</div>
+
+</div>
 </section>
 
+<!-- KONTAK -->
 <section id="kontak" class="reveal">
-  <h2 data-id="Kontak" data-en="Contact">Kontak</h2>
-  <div class="contact-buttons">
-    <a href="mailto:email@anda.com" class="contact-btn gmail">Gmail</a>
-    <a href="https://wa.me/6281234567890" target="_blank" class="contact-btn whatsapp">WhatsApp</a>
-    <a href="https://github.com/anda" target="_blank" class="contact-btn github">GitHub</a>
-    <a href="https://linkedin.com/in/anda" target="_blank" class="contact-btn linkedin">LinkedIn</a>
-  </div>
+<h2>Kontak</h2>
+<div class="contact-buttons">
+  <a class="contact-btn gmail" href="mailto:email@anda.com">Gmail</a>
+  <a class="contact-btn whatsapp" href="https://wa.me/6281234567890">WhatsApp</a>
+  <a class="contact-btn github" href="#">GitHub</a>
+  <a class="contact-btn linkedin" href="#">LinkedIn</a>
+</div>
 </section>
 
 <footer>© 2026 Nama Anda</footer>
 </div>
 
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3 id="modalTitle"></h3>
+    <p id="modalText"></p>
+    <span class="close" onclick="closeModal()">Tutup</span>
+  </div>
+</div>
+
 <script>
-let lang = "id";
-function toggleLang() {
-  lang = lang === "id" ? "en" : "id";
-  document.querySelectorAll("[data-id]").forEach(el => {
-    el.textContent = el.dataset[lang];
-  });
+function openModal(title,text){
+  document.getElementById("modalTitle").innerText=title
+  document.getElementById("modalText").innerText=text
+  document.getElementById("modal").style.display="flex"
+}
+function closeModal(){
+  document.getElementById("modal").style.display="none"
 }
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add("show");
-  });
-}, { threshold: 0.15 });
-
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show")})
+},{threshold:.15})
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el))
 </script>
 
 </body>
