@@ -30,29 +30,54 @@ nav{
   text-decoration:none;color:#fff;
   font-size:.85rem;border:none;cursor:pointer
 }
+
+/* HERO */
 .hero{
   padding:200px 20px 120px;text-align:center
 }
 .hero h1{font-size:3rem;margin-bottom:12px}
 .hero p{color:#cbd5f5;margin-bottom:32px}
+
 section{
   max-width:1100px;margin:0 auto 120px;padding:0 20px
 }
 h2{margin-bottom:24px}
-.reveal{opacity:0;transform:translateY(40px);transition:.8s}
+
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:.8s
+}
 .reveal.show{opacity:1;transform:none}
 
-/* ARTICLE */
+/* ===== ARTIKEL (MENGAMBANG) ===== */
 .article-carousel{
-  display:flex;gap:24px;overflow-x:auto
+  display:flex;
+  gap:24px;
+  overflow-x:auto;
+  padding-bottom:20px
 }
+
 .article-card{
   min-width:300px;
   background:rgba(15,23,42,.9);
-  border-radius:18px;overflow:hidden
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(0,0,0,.4);
+  transition:transform .4s ease, box-shadow .4s ease
 }
-.article-image{height:180px;background-size:cover}
+.article-card:hover{
+  transform:translateY(-12px);
+  box-shadow:0 30px 60px rgba(0,0,0,.6)
+}
+
+.article-image{
+  height:180px;
+  background-size:cover;
+  background-position:center
+}
 .article-content{padding:20px}
+
 .btn{
   margin-top:14px;
   display:inline-block;
@@ -65,7 +90,7 @@ h2{margin-bottom:24px}
   cursor:pointer
 }
 
-/* PROJECT */
+/* ===== PROJECT ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -73,13 +98,15 @@ h2{margin-bottom:24px}
 }
 .card{
   background:rgba(15,23,42,.9);
-  padding:28px;border-radius:16px
+  padding:28px;
+  border-radius:16px
 }
 
-/* MODAL */
+/* ===== MODAL ===== */
 .modal{
-  position:fixed;inset:0;
-  background:rgba(2,6,23,.85);
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,23,.9);
   display:none;
   align-items:center;
   justify-content:center;
@@ -87,34 +114,47 @@ h2{margin-bottom:24px}
 }
 .modal-content{
   background:#020617;
-  max-width:600px;
-  padding:32px;
+  max-width:700px;
+  width:90%;
   border-radius:18px;
+  overflow:hidden;
   animation:pop .4s ease
 }
 @keyframes pop{
-  from{transform:scale(.85);opacity:0}
+  from{transform:scale(.9);opacity:0}
   to{transform:scale(1);opacity:1}
 }
-.modal h3{margin-bottom:12px}
-.modal p{color:#cbd5f5}
+
+.modal-img{
+  width:100%;
+  height:260px;
+  object-fit:cover
+}
+.modal-body{
+  padding:24px
+}
+.modal-body h3{margin-bottom:12px}
+.modal-body p{color:#cbd5f5;line-height:1.6}
 .close{
-  margin-top:20px;
   display:inline-block;
+  margin-top:20px;
   color:#38bdf8;
   cursor:pointer
 }
 
-/* CONTACT */
+/* ===== KONTAK ===== */
 .contact-buttons{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:16px
 }
 .contact-btn{
-  padding:14px;border-radius:999px;
-  color:#fff;text-align:center;
-  text-decoration:none;font-weight:600
+  padding:14px;
+  border-radius:999px;
+  color:#fff;
+  text-align:center;
+  text-decoration:none;
+  font-weight:600
 }
 .whatsapp{background:#25D366}
 .gmail{background:#EA4335}
@@ -135,7 +175,6 @@ footer{text-align:center;padding:40px;color:#94a3b8}
       <a href="#artikel">Artikel</a>
       <a href="#proyek">Proyek</a>
       <a href="#kontak">Kontak</a>
-      <button class="lang-btn">ID / EN</button>
     </div>
   </div>
 </nav>
@@ -148,23 +187,34 @@ footer{text-align:center;padding:40px;color:#94a3b8}
 <!-- ARTIKEL -->
 <section id="artikel" class="reveal">
 <h2>Artikel</h2>
+
 <div class="article-carousel">
 
 <div class="article-card">
   <div class="article-image" style="background-image:url('artikel1.jpg')"></div>
   <div class="article-content">
-    <h3>My Darling.</h3>
-    <p>All About Girlfriend.</p>
-    <span class="btn" onclick="openModal('Website Modern','Kita Menjalin Hubungan Pada Tanggal 13 Agustus 2024.')">Baca Selengkapnya</span>
+    <h3>My Darling</h3>
+    <p>All About Girlfriend</p>
+    <span class="btn"
+      onclick="openModal(
+        'My Darling',
+        'Kita menjalin hubungan pada tanggal 13 Agustus 2024. Kisah ini adalah bagian terindah dalam hidup saya.',
+        'artikel1.jpg'
+      )">Baca Selengkapnya</span>
   </div>
 </div>
 
 <div class="article-card">
   <div class="article-image" style="background-image:url('artikel2.jpg')"></div>
   <div class="article-content">
-    <h3>Web Info.</h3>
-    <p>DAll About Website.</p>
-    <span class="btn" onclick="openModal('UI/UX Bisnis','Website ini di kembangkan Oleh @Hendra Pada Tanggal 06 Februari 2026.')">Baca Selengkapnya</span>
+    <h3>Web Info</h3>
+    <p>All About Website</p>
+    <span class="btn"
+      onclick="openModal(
+        'Web Info',
+        'Website ini dikembangkan oleh Hendra pada tanggal 06 Februari 2026 sebagai portfolio pribadi.',
+        'artikel2.jpg'
+      )">Baca Selengkapnya</span>
   </div>
 </div>
 
@@ -174,20 +224,18 @@ footer{text-align:center;padding:40px;color:#94a3b8}
 <!-- PROYEK -->
 <section id="proyek" class="reveal">
 <h2>Proyek</h2>
+
 <div class="grid">
-
-<div class="card">
-  <h3>Project A</h3>
-  <p>Website Company Profile</p>
-  <span class="btn" onclick="openModal('Project A','Detail lengkap project A, teknologi yang digunakan, dan hasil yang dicapai.')">Detail Proyek</span>
-</div>
-
-<div class="card">
-  <h3>Project B</h3>
-  <p>Landing Page Produk</p>
-  <span class="btn" onclick="openModal('Project B','Studi kasus project B, optimasi performa dan konversi.')">Detail Proyek</span>
-</div>
-
+  <div class="card">
+    <h3>Project A</h3>
+    <p>Website Company Profile</p>
+    <span class="btn"
+      onclick="openModal(
+        'Project A',
+        'Project company profile dengan desain modern, responsif, dan performa tinggi.',
+        'artikel3.jpg'
+      )">Detail Proyek</span>
+  </div>
 </div>
 </section>
 
@@ -208,24 +256,30 @@ footer{text-align:center;padding:40px;color:#94a3b8}
 <!-- MODAL -->
 <div class="modal" id="modal">
   <div class="modal-content">
-    <h3 id="modalTitle"></h3>
-    <p id="modalText"></p>
-    <span class="close" onclick="closeModal()">Tutup</span>
+    <img id="modalImg" class="modal-img">
+    <div class="modal-body">
+      <h3 id="modalTitle"></h3>
+      <p id="modalText"></p>
+      <span class="close" onclick="closeModal()">Tutup</span>
+    </div>
   </div>
 </div>
 
 <script>
-function openModal(title,text){
-  document.getElementById("modalTitle").innerText=title
-  document.getElementById("modalText").innerText=text
-  document.getElementById("modal").style.display="flex"
+function openModal(title,text,img){
+  document.getElementById("modalTitle").innerText = title
+  document.getElementById("modalText").innerText = text
+  document.getElementById("modalImg").src = img
+  document.getElementById("modal").style.display = "flex"
 }
 function closeModal(){
-  document.getElementById("modal").style.display="none"
+  document.getElementById("modal").style.display = "none"
 }
 
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show")})
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add("show")
+  })
 },{threshold:.15})
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el))
 </script>
