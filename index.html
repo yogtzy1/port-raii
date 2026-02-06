@@ -9,40 +9,93 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+
 body{
   font-family:Inter,system-ui,sans-serif;
   background:url("background.jpg") center/cover no-repeat fixed;
   color:#e5e7eb
 }
+
 .overlay{min-height:100vh;background:rgba(2,6,23,.78)}
+
+/* ===== NAV ===== */
 nav{
-  position:fixed;top:0;width:100%;
-  background:rgba(2,6,23,.95);z-index:1000
+  position:fixed;
+  top:0;
+  width:100%;
+  background:rgba(2,6,23,.95);
+  z-index:1000
 }
 .nav-inner{
-  max-width:1100px;margin:auto;
+  max-width:1100px;
+  margin:auto;
   padding:14px 20px;
-  display:flex;justify-content:space-between;align-items:center
-}
-.nav-links a,.lang-btn{
-  margin-left:10px;padding:8px 16px;
-  background:#1e293b;border-radius:999px;
-  text-decoration:none;color:#fff;
-  font-size:.85rem;border:none;cursor:pointer
+  display:flex;
+  justify-content:space-between;
+  align-items:center
 }
 
-/* HERO */
+/* ===== HAMBURGER ===== */
+.menu-btn{
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  background:#020617
+}
+.menu-btn span{
+  width:22px;
+  height:2px;
+  background:#fff;
+  margin:3px 0;
+  transition:.3s
+}
+
+/* ===== DROPDOWN MENU ===== */
+.menu-box{
+  position:absolute;
+  top:70px;
+  right:20px;
+  background:rgba(15,23,42,.95);
+  border-radius:16px;
+  padding:14px;
+  display:none;
+  flex-direction:column;
+  gap:10px;
+  box-shadow:0 20px 40px rgba(0,0,0,.6)
+}
+.menu-box a{
+  padding:10px 18px;
+  border-radius:999px;
+  background:#1e293b;
+  color:#fff;
+  text-decoration:none;
+  font-size:.9rem;
+  text-align:center
+}
+.menu-box.show{display:flex}
+
+/* ===== HERO ===== */
 .hero{
-  padding:200px 20px 120px;text-align:center
+  padding:200px 20px 120px;
+  text-align:center
 }
 .hero h1{font-size:3rem;margin-bottom:12px}
-.hero p{color:#cbd5f5;margin-bottom:32px}
+.hero p{color:#cbd5f5}
 
+/* ===== SECTION ===== */
 section{
-  max-width:1100px;margin:0 auto 120px;padding:0 20px
+  max-width:1100px;
+  margin:0 auto 120px;
+  padding:0 20px
 }
 h2{margin-bottom:24px}
 
+/* ===== REVEAL ===== */
 .reveal{
   opacity:0;
   transform:translateY(40px);
@@ -50,27 +103,20 @@ h2{margin-bottom:24px}
 }
 .reveal.show{opacity:1;transform:none}
 
-/* ===== ARTIKEL (MENGAMBANG) ===== */
+/* ===== ARTIKEL ===== */
 .article-carousel{
   display:flex;
   gap:24px;
   overflow-x:auto;
   padding-bottom:20px
 }
-
 .article-card{
   min-width:300px;
   background:rgba(15,23,42,.9);
   border-radius:18px;
   overflow:hidden;
-  box-shadow:0 20px 40px rgba(0,0,0,.4);
-  transition:transform .4s ease, box-shadow .4s ease
+  box-shadow:0 20px 40px rgba(0,0,0,.4)
 }
-.article-card:hover{
-  transform:translateY(-12px);
-  box-shadow:0 30px 60px rgba(0,0,0,.6)
-}
-
 .article-image{
   height:180px;
   background-size:cover;
@@ -78,6 +124,7 @@ h2{margin-bottom:24px}
 }
 .article-content{padding:20px}
 
+/* ===== BUTTON ===== */
 .btn{
   margin-top:14px;
   display:inline-block;
@@ -124,23 +171,14 @@ h2{margin-bottom:24px}
   from{transform:scale(.9);opacity:0}
   to{transform:scale(1);opacity:1}
 }
-
 .modal-img{
   width:100%;
   height:260px;
   object-fit:cover
 }
-.modal-body{
-  padding:24px
-}
-.modal-body h3{margin-bottom:12px}
+.modal-body{padding:24px}
 .modal-body p{color:#cbd5f5;line-height:1.6}
-.close{
-  display:inline-block;
-  margin-top:20px;
-  color:#38bdf8;
-  cursor:pointer
-}
+.close{color:#38bdf8;cursor:pointer}
 
 /* ===== KONTAK ===== */
 .contact-buttons{
@@ -171,10 +209,17 @@ footer{text-align:center;padding:40px;color:#94a3b8}
 <nav>
   <div class="nav-inner">
     <strong>Portfolio</strong>
-    <div class="nav-links">
-      <a href="#artikel">Artikel</a>
-      <a href="#proyek">Proyek</a>
-      <a href="#kontak">Kontak</a>
+
+    <div class="menu-btn" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="menu-box" id="menuBox">
+      <a href="#artikel" onclick="toggleMenu()">Artikel</a>
+      <a href="#proyek" onclick="toggleMenu()">Proyek</a>
+      <a href="#kontak" onclick="toggleMenu()">Kontak</a>
     </div>
   </div>
 </nav>
@@ -184,62 +229,35 @@ footer{text-align:center;padding:40px;color:#94a3b8}
   <p>Web Developer & Pelajar</p>
 </div>
 
-<!-- ARTIKEL -->
 <section id="artikel" class="reveal">
 <h2>Artikel</h2>
-
 <div class="article-carousel">
-
-<div class="article-card">
-  <div class="article-image" style="background-image:url('artikel1.jpg')"></div>
-  <div class="article-content">
-    <h3>My Darling</h3>
-    <p>All About Girlfriend</p>
-    <span class="btn"
-      onclick="openModal(
-        'My Darling',
-        'Kita menjalin hubungan pada tanggal 13 Agustus 2024. Kisah ini adalah bagian terindah dalam hidup saya.',
-        'artikel1.jpg'
-      )">Baca Selengkapnya</span>
+  <div class="article-card">
+    <div class="article-image" style="background-image:url('artikel1.jpg')"></div>
+    <div class="article-content">
+      <h3>My Darling</h3>
+      <p>All About Girlfriend</p>
+      <span class="btn" onclick="openModal('My Darling','Kisah terbaik dalam hidup saya.','artikel1.jpg')">
+        Baca Selengkapnya
+      </span>
+    </div>
   </div>
-</div>
-
-<div class="article-card">
-  <div class="article-image" style="background-image:url('artikel2.jpg')"></div>
-  <div class="article-content">
-    <h3>Web Info</h3>
-    <p>All About Website</p>
-    <span class="btn"
-      onclick="openModal(
-        'Web Info',
-        'Website ini dikembangkan oleh Hendra pada tanggal 06 Februari 2026 sebagai portfolio pribadi.',
-        'artikel2.jpg'
-      )">Baca Selengkapnya</span>
-  </div>
-</div>
-
 </div>
 </section>
 
-<!-- PROYEK -->
 <section id="proyek" class="reveal">
 <h2>Proyek</h2>
-
 <div class="grid">
   <div class="card">
     <h3>Project A</h3>
     <p>Website Company Profile</p>
-    <span class="btn"
-      onclick="openModal(
-        'Project A',
-        'Project company profile dengan desain modern, responsif, dan performa tinggi.',
-        'artikel3.jpg'
-      )">Detail Proyek</span>
+    <span class="btn" onclick="openModal('Project A','Project profesional dengan performa tinggi.','artikel2.jpg')">
+      Detail Proyek
+    </span>
   </div>
 </div>
 </section>
 
-<!-- KONTAK -->
 <section id="kontak" class="reveal">
 <h2>Kontak</h2>
 <div class="contact-buttons">
@@ -266,19 +284,23 @@ footer{text-align:center;padding:40px;color:#94a3b8}
 </div>
 
 <script>
-function openModal(title,text,img){
-  document.getElementById("modalTitle").innerText = title
-  document.getElementById("modalText").innerText = text
-  document.getElementById("modalImg").src = img
-  document.getElementById("modal").style.display = "flex"
-}
-function closeModal(){
-  document.getElementById("modal").style.display = "none"
+function toggleMenu(){
+  document.getElementById("menuBox").classList.toggle("show")
 }
 
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("show")
+function openModal(title,text,img){
+  modal.style.display="flex"
+  modalTitle.innerText=title
+  modalText.innerText=text
+  modalImg.src=img
+}
+function closeModal(){
+  modal.style.display="none"
+}
+
+const observer=new IntersectionObserver(e=>{
+  e.forEach(x=>{
+    if(x.isIntersecting) x.target.classList.add("show")
   })
 },{threshold:.15})
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el))
