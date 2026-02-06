@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <title>Portfolio | Nama Anda</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -106,7 +106,7 @@ section h2 {
   margin-bottom: 28px;
 }
 
-/* SCROLL ANIMATION */
+/* REVEAL */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -124,16 +124,6 @@ section h2 {
   gap: 24px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding-bottom: 10px;
-}
-
-.article-carousel::-webkit-scrollbar {
-  height: 8px;
-}
-
-.article-carousel::-webkit-scrollbar-thumb {
-  background: #38bdf8;
-  border-radius: 4px;
 }
 
 .article-card {
@@ -142,31 +132,16 @@ section h2 {
   border-radius: 18px;
   overflow: hidden;
   scroll-snap-align: start;
-  transition: transform 0.4s ease;
-}
-
-.article-card:hover {
-  transform: translateY(-8px);
 }
 
 .article-image {
   height: 180px;
   background-size: cover;
   background-position: center;
-  transition: transform 0.6s ease;
-}
-
-.article-card:hover .article-image {
-  transform: scale(1.1);
 }
 
 .article-content {
   padding: 20px;
-}
-
-.article-content p {
-  font-size: 0.9rem;
-  color: #cbd5f5;
 }
 
 /* PROJECT */
@@ -184,33 +159,43 @@ section h2 {
 
 /* CONTACT BUTTONS */
 .contact-buttons {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
   gap: 16px;
 }
 
 .contact-btn {
-  flex: 1;
-  min-width: 200px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   padding: 14px 20px;
   border-radius: 999px;
-  background: #38bdf8;
-  color: #020617;
   font-weight: 600;
+  color: white;
   text-decoration: none;
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-btn svg {
+  width: 20px;
+  height: 20px;
 }
 
 .contact-btn:hover {
-  background: #7dd3fc;
   transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
+
+.whatsapp { background: #25D366; }
+.gmail { background: #EA4335; }
+.github { background: #111827; }
+.linkedin { background: #0A66C2; }
 
 footer {
   text-align: center;
+  padding: 40px;
   color: #94a3b8;
-  padding-bottom: 40px;
 }
 </style>
 </head>
@@ -218,7 +203,6 @@ footer {
 <body>
 <div class="overlay">
 
-<!-- NAVBAR -->
 <nav>
   <div class="nav-inner">
     <strong>Portfolio</strong>
@@ -231,7 +215,6 @@ footer {
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero reveal">
   <h1>Nama Anda</h1>
   <p data-id="Web Developer & UI Designer"
@@ -245,42 +228,33 @@ footer {
   </div>
 </div>
 
-<!-- ARTIKEL -->
 <section id="artikel" class="reveal">
   <h2 data-id="Artikel" data-en="Articles">Artikel</h2>
   <div class="article-carousel">
-
     <div class="article-card">
       <div class="article-image" style="background-image:url('artikel1.jpg')"></div>
       <div class="article-content">
-        <h3 data-id="Website Modern" data-en="Modern Websites">Website Modern</h3>
-        <p data-id="Teknologi dan desain web terkini."
-           data-en="Latest web technologies and design.">
-           Teknologi dan desain web terkini.
-        </p>
+        <h3>Website Modern</h3>
+        <p>Teknologi web terbaru.</p>
       </div>
     </div>
-
     <div class="article-card">
       <div class="article-image" style="background-image:url('artikel2.jpg')"></div>
       <div class="article-content">
-        <h3>UI/UX Bisnis</h3>
-        <p>Meningkatkan kepercayaan dan konversi.</p>
+        <h3>UI/UX</h3>
+        <p>Desain profesional.</p>
       </div>
     </div>
-
     <div class="article-card">
       <div class="article-image" style="background-image:url('artikel3.jpg')"></div>
       <div class="article-content">
-        <h3>Optimasi Web</h3>
-        <p>Performa cepat dan SEO optimal.</p>
+        <h3>Optimasi</h3>
+        <p>Performa & SEO.</p>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- PROYEK -->
 <section id="proyek" class="reveal">
   <h2 data-id="Proyek" data-en="Projects">Proyek</h2>
   <div class="grid">
@@ -290,47 +264,21 @@ footer {
   </div>
 </section>
 
-<!-- KONTAK -->
 <section id="kontak" class="reveal">
   <h2 data-id="Kontak" data-en="Contact">Kontak</h2>
-
-  <div class="card">
-    <div class="contact-buttons">
-
-      <a href="mailto:email@anda.com" class="contact-btn"
-         data-id="📧 Email Saya" data-en="📧 Email Me">
-         📧 Email Saya
-      </a>
-
-      <a href="https://wa.me/6281234567890" target="_blank"
-         class="contact-btn"
-         data-id="💬 WhatsApp" data-en="💬 WhatsApp">
-         💬 WhatsApp
-      </a>
-
-      <a href="https://github.com/anda" target="_blank"
-         class="contact-btn"
-         data-id="💻 GitHub" data-en="💻 GitHub">
-         💻 GitHub
-      </a>
-
-      <a href="https://linkedin.com/in/anda" target="_blank"
-         class="contact-btn"
-         data-id="🔗 LinkedIn" data-en="🔗 LinkedIn">
-         🔗 LinkedIn
-      </a>
-
-    </div>
+  <div class="contact-buttons">
+    <a href="mailto:email@anda.com" class="contact-btn gmail">Gmail</a>
+    <a href="https://wa.me/6281234567890" target="_blank" class="contact-btn whatsapp">WhatsApp</a>
+    <a href="https://github.com/anda" target="_blank" class="contact-btn github">GitHub</a>
+    <a href="https://linkedin.com/in/anda" target="_blank" class="contact-btn linkedin">LinkedIn</a>
   </div>
 </section>
 
 <footer>© 2026 Nama Anda</footer>
-
 </div>
 
 <script>
 let lang = "id";
-
 function toggleLang() {
   lang = lang === "id" ? "en" : "id";
   document.querySelectorAll("[data-id]").forEach(el => {
@@ -338,12 +286,9 @@ function toggleLang() {
   });
 }
 
-/* SCROLL REVEAL */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
+    if (entry.isIntersecting) entry.target.classList.add("show");
   });
 }, { threshold: 0.15 });
 
